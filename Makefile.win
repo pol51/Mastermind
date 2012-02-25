@@ -1,0 +1,42 @@
+# Project: SDL_Mastermind
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = SDL_Mastermind_private.res
+OBJ  = es.o main.o mm.o score.o $(RES)
+LINKOBJ  = es.o main.o mm.o score.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -l conio -mwindows -lmingw32 -lSDLmain -lSDL  -g3 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = SDL_Mastermind.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS) -Dmain=SDL_main   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before SDL_Mastermind.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "SDL_Mastermind.exe" $(LIBS)
+
+es.o: es.c
+	$(CC) -c es.c -o es.o $(CFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+mm.o: mm.c
+	$(CC) -c mm.c -o mm.o $(CFLAGS)
+
+score.o: score.c
+	$(CC) -c score.c -o score.o $(CFLAGS)
+
+SDL_Mastermind_private.res: SDL_Mastermind_private.rc 
+	$(WINDRES) -i SDL_Mastermind_private.rc --input-format=rc -o SDL_Mastermind_private.res -O coff 
